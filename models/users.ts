@@ -1,11 +1,10 @@
-import {Model, Schema, model} from 'mongoose'
+import {Model, ObjectId, Schema, model} from 'mongoose'
 
 export interface IUser {
     dni: number,
     nombre: string,
-    gasto: number,
-    gastoTotal: number,
-
+    gasto: ObjectId,
+    estado: boolean,
 }
 
 const UserSchema = new Schema <IUser>({
@@ -18,13 +17,14 @@ const UserSchema = new Schema <IUser>({
         type: String,
         required: true, 
     },
-    gasto:{
-        type: Number,
-        required: true,
-    },
-    gastoTotal:{
-        type: Number,
+    estado:{
+        type: Boolean,
         required: false,
+        default: true,
+    },
+    gasto:{
+      type: Schema.Types.ObjectId,
+      ref:"Gasto",
     }
 })
 

@@ -12,16 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.conectarDB = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
-const conectarDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield mongoose_1.default.connect("mongodb+srv://backendE2:nucbae2backend@nombredecluster.dafwh8z.mongodb.net/");
-        console.log("Base de Datos conectada");
+exports.createGasto = void 0;
+const gastos_1 = __importDefault(require("../models/gastos"));
+const createGasto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const gastoData = req.body;
+    const { nombre, dni, monto, razon } = gastoData;
+    if (!nombre || !dni || !monto || !razon) {
+        res.json({
+            msj: "faltan datos necesarios"
+        });
+        return;
     }
-    catch (error) {
-        console.log(error);
-        throw new Error("error al iniciar Base de Datos");
-    }
+    const gasto = new gastos_1.default(gastoData);
+    yield gasto.save();
+    res.json({
+        msj: "nuevo gasto creado",
+        gasto
+    });
 });
-exports.conectarDB = conectarDB;
+exports.createGasto = createGasto;

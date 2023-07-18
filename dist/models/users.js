@@ -11,13 +11,14 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    gasto: {
-        type: Number,
-        required: true,
-    },
-    gastoTotal: {
-        type: Number,
+    estado: {
+        type: Boolean,
         required: false,
+        default: true,
+    },
+    gasto: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Gasto",
     }
 });
 const User = (0, mongoose_1.model)("User", UserSchema);

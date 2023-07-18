@@ -14,12 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
+const userRoutes_1 = __importDefault(require("../routes/userRoutes"));
+const gastosRoutes_1 = __importDefault(require("../routes/gastosRoutes"));
 const config_1 = require("../database/config");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.conexionDB();
         this.middlewares();
+        this.routes();
     }
     conexionDB() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,6 +31,10 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
+    }
+    routes() {
+        this.app.use("/usuarios", userRoutes_1.default);
+        this.app.use("/gastos", gastosRoutes_1.default);
     }
     listen() {
         this.app.listen(8080, () => {

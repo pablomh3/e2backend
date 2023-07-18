@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const conectarDB = async  (): Promise <void> => {
     try {
-        await mongoose.connect("mongodb+srv://pablomh3:Okebambo7@nombredecluster.slr0vja.mongodb.net/")
+        await mongoose.connect("mongodb+srv://backendE2:nucbae2backend@nombredecluster.dafwh8z.mongodb.net/")
         console.log("Base de Datos conectada")
     } catch (error) {
         console.log(error)
